@@ -1,0 +1,12 @@
+El modelo codificado de sensor se implementa con dos structs:
+
+-task_sensor_cfg, que contiene la configuración del botón (ID, puerto, pin, el estado que debe detectar en el pin GPIO, el tick maximo, y los eventos que debe mandar al sistema)
+-task_sensor_dta, que contiene el estado y el evento actual del sensor, junto con el valor del tick
+
+En task_sensor.c se declaran los botones necesarios en un array de task_sensor_cfg. Luego, se inicializan en un array de task_sensor_dta. El array de configuración y de datos se relacionan elemento a elemento.
+Se declararon 6 botones aparte del ya integrado a la placa, a cada uno se le asignó el evento correspondiente que manda al sistema.
+
+En board.c se hicieron defines para los pines y puertos de cada botón.
+
+En la función update, se hace un for sobre el array de data y luego se entraa a un switch sobre cada estado posible del botón, dentro de cada case, hay un if para cada estado. 
+De esta manera, todos los botones declarados se van actualizando. Se implementó el modelo de botón propio.
